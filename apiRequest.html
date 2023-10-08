@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=`, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    API Request
+  </body>
+  <script>
+    const addImage = (src) => {
+      const image = document.createElement("img");
+      image.setAttribute("src", src);
+      image.setAttribute("width", "400px");
+      image.setAttribute("height", "400px");
+      image.setAttribute("alt", "user-image");
+      document.body.appendChild(image);
+    };
+
+    const url = "https://api.github.com/users/sudhanshu1309";
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.onreadystatechange = () => {
+      // console.log(xhr.readyState);
+      if (xhr.readyState === 4) {
+        const data = JSON.parse(xhr.responseText);
+        // console.log(data.followers);
+        const imageUrl = data.avatar_url;
+        addImage(imageUrl);
+      }
+    };
+    xhr.send();
+  </script>
+</html>
